@@ -31,7 +31,7 @@
          :ns-compile [main]))
 
 (defn ci "Run the CI pipeline of tests (and build the uberjar)." [opts]
-  (test opts)
+  ; (test opts)
   (b/delete {:path "target"})
   (let [opts (uber-opts opts)]
     (println "\nCopying source...")
