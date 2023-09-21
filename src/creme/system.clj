@@ -1,17 +1,16 @@
 (ns creme.system
   (:require [integrant.core :as ig]
-            [creme.server :as server]))
+            [creme.server :as server]
+            [creme.handler :as handler]
+            [creme.config :as config]))
 
 ; TODO: check https://www.pixelated-noise.com/blog/2022/04/28/integrant-and-aero/index.html
 ; to have aero (https://github.com/juxt/aero) for configuration + integrant
 (def config
-  {::server-opts {}
-   ::server/server (ig/ref ::server-opts)})
-
-(defmethod ig/init-key
-  ::server-opts
-  [_ _]
-  {:port 8000})
+  {::handler/handler {:config (ig/ref ::config/config)}
+   ::server/server {:handler (ig/ref ::handler/handler)
+                    :config (ig/ref ::config/config)}
+   ::config/config {}})
 
 (defn start
   []

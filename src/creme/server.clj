@@ -1,19 +1,17 @@
 (ns creme.server
   (:require [org.httpkit.server :as hk-server]
-            [integrant.core :as ig]))
+            [integrant.core :as ig]
+            [creme.config :as config]))
 
-(defn start [opts]
-  (println "got opts launching server" opts)
-  (let [app (fn app [_req]
-              {:status 200
-               :headers {"Content-Type" "text/html"}
-               :body "Hello HTTP!"})]
-    {::stop-server (hk-server/run-server app opts)}))
+(defn start [handler port]
+  (println "got opts launching server on port" port)
+  {::stop-server (hk-server/run-server handler {:port port})})
 
 (defmethod ig/init-key
   ::server
-  [_ opts]
-  (start opts))
+  [_ {:keys [handler config] :as deps}]
+  (println "starting server with deps:" deps)
+  (start handler (::config/port config)))
 
 (defmethod ig/halt-key!
   ::server
