@@ -2,6 +2,7 @@
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         integrant/integrant {:mvn/version "0.8.1"}
         compojure/compojure {:mvn/version "1.7.0"}
+        hiccup/hiccup {:mvn/version "2.0.0-RC1"}
         ring/ring {:mvn/version "1.11.0-alpha3"}
         http-kit/http-kit {:mvn/version "2.7.0"}}
  :aliases
