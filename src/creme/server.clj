@@ -9,12 +9,10 @@
 
 (defmethod ig/init-key
   ::server
-  [_ {:keys [handler config] :as deps}]
-  (println "starting server with deps:" deps)
+  [_ {:keys [handler config]}]
   (start handler (::config/port config)))
 
 (defmethod ig/halt-key!
   ::server
-  [_ {:keys [::stop-server] :as opts}]
-  (println "halting server with opts" opts)
+  [_ {:keys [::stop-server]}]
   (stop-server))

@@ -4,7 +4,10 @@ FIXME: my new application.
 
 ## Installation
 
-Download from https://github.com/creme/creme
+
+* Need to have **postgresql** installed and running with a socket at `/var/run/postgresql/.s.PGSQL.5432`.
+* Need to have a db user `creme` owning the database `creme`.
+
 
 ## Usage
 
