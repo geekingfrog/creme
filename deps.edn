@@ -22,6 +22,8 @@
   :run-x {:ns-default creme.creme
           :exec-fn greet
           :exec-args {:name "Clojure"}}
+  :migrate {:main-opts ["-m" "creme.migrations"]
+            :extra-deps {org.clojure/tools.cli {:mvn/version "1.0.219"}}}
   :build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.4"}}
           :ns-default build}
   :test {:extra-paths ["test"]
@@ -31,4 +33,5 @@
   :repl/reloaded
   {:extra-paths ["localdev"]
    :extra-deps {org.clojure/tools.namespace {:mvn/version "1.4.4"}
-                integrant/repl {:mvn/version "0.3.3"}}}}}
+                integrant/repl {:mvn/version "0.3.3"}
+                org.clojure/tools.cli {:mvn/version "1.0.219"}}}}}
