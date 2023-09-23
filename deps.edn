@@ -7,6 +7,7 @@
         http-kit/http-kit {:mvn/version "2.7.0"}
         com.zaxxer/HikariCP {:mvn/version "5.0.1"}
         com.github.seancorfield/next.jdbc {:mvn/version "1.3.883"}
+        com.github.seancorfield/honeysql {:mvn/version "2.4.1066"}
         org.postgresql/postgresql {:mvn/version "42.6.0"}
         ; junixsocket-core is a pom only dependency and deps doesn't support
         ; that so instead do the following as mentionned in
