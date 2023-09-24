@@ -22,4 +22,4 @@
 (defmethod ig/halt-key!
   ::db-pool
   [_ ^HikariDataSource datasource]
-  (.close datasource))
+  (when datasource (.close datasource)))
