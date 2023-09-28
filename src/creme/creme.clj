@@ -2,13 +2,16 @@
   (:gen-class)
   (:import (com.zaxxer.hikari HikariDataSource))
   (:require
+   [creme.system]
    [next.jdbc :as jdbc]
    [next.jdbc.connection :as connection]
    [honey.sql :as sql]))
 
 (defn -main
   "I don't do a whole lot ... yet."
-  [& args])
+  [& args]
+  (creme.system/start)
+  (println "finishing"))
 
 (comment
   (set! *warn-on-reflection* true)
@@ -32,8 +35,7 @@
                                        :columns [:val]
                                        :values [[(format "coucou%03d" (inc c))]]}) #_["insert into blah (val) VALUES ('coucou1')"]))
       (let [all-blah (jdbc/execute! ds (sql/format {:select [:*] :from [:blah]}))]
-        all-blah
-        )
+        all-blah)
 
       #_(jdbc/execute! ds ["select * from blah"])))
   :nil)

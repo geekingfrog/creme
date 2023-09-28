@@ -26,22 +26,6 @@
   (render [{:keys [field-map] :as this}]
     ((:render-fn field-map) this)))
 
-(defn input-field-foo
-  ([opts hiccup-fn] (input-field-foo opts hiccup-fn {}))
-  ([{:keys [placeholder name display-name id] :as opts} hiccup-fn input-field-props]
-   (let [placeholder (if (some? placeholder) {:placeholder placeholder} {})
-         field-name (or id name)
-         render-fn
-         (fn render-text-field [this]
-           (let [err (-> this :field-map :errors)
-                 props (if err {:aria-invalid "true"} {})]
-             [:fieldset
-              (hf/label field-name (or display-name name))
-              (when err [:span.error (util/as-str err)])
-              (hiccup-fn (merge props input-field-props) field-name (serialize this))]))]
-     (->Field (merge {:placeholder placeholder
-                      :render-fn render-fn} opts)))))
-
 (defn text-field [{:keys [placeholder name display-name id] :as opts}]
   (let [field-props (if (some? placeholder) {:placeholder placeholder} {})
         field-name (or id name)

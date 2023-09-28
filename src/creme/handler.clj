@@ -6,7 +6,8 @@
             [hiccup2.core :as h]
             [taoensso.timbre :as timbre]
             [creme.coucou.form :as formtest]
-            [clojure.pprint :as pp]))
+            [clojure.pprint :as pp]
+            [creme.org.views :as org-view]))
 
 (defn handler [deps]
   (compojure/routes
@@ -14,6 +15,10 @@
      (str (h/html [:h1 "Coucou world!" " " (::config/counter deps)])))
    (GET "/coucou/:nick" [nick]
      (str (h/html [:h1 "Coucou " nick])))
+
+   (compojure/context "/org" []
+     (GET "/" [] (org-view/render-create nil)) ; TODO this should be a list of org
+     (POST "/" request (org-view/render-create (:params request))))
 
    (compojure/context "/formtest" []
      (GET "/" [] (formtest/render-page))
@@ -29,5 +34,4 @@
 (defmethod ig/init-key
   ::handler
   [_ deps]
-  (println "init routes with deps:" deps)
   (handler (:config deps)))

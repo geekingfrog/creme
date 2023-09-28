@@ -34,4 +34,5 @@
   {:extra-paths ["localdev"]
    :extra-deps {org.clojure/tools.namespace {:mvn/version "1.4.4"}
                 integrant/repl {:mvn/version "0.3.3"}
-                org.clojure/tools.cli {:mvn/version "1.0.219"}}}}}
+                org.clojure/tools.cli {:mvn/version "1.0.219"}
+                hiccup-bridge/hiccup-bridge {:mvn/version "1.0.1"}}}}}
