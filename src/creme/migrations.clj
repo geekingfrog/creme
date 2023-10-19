@@ -39,13 +39,14 @@
   (set! *warn-on-reflection* true)
   (let [parsed (cli/parse-opts args cli-options)
         arguments (:arguments parsed)
-        conf (ig/init migration-config [::migration-config])]
-    (println "migration config" conf)
+        ig-conf (ig/init migration-config [::migration-config])
+        conf (::migration-config ig-conf)]
     (try
       (when-let [err (:errors parsed)]
         (throw (ex-info "Invalid arguments" {:errors err})))
       (cond
         (empty? arguments) (migratus/migrate conf)
+        (= "migrate" (first arguments)) (migratus/migrate conf)
 
         (= "create" (first arguments))
         (migratus/create conf (second arguments))
@@ -58,10 +59,10 @@
 
         :else (throw (RuntimeException. (str "unknown arguments " arguments))))
       (finally
-        (ig/halt! conf)))))
+        (ig/halt! ig-conf)))))
 
 (comment
-  (ig/init migration-config [::migration])
+  (ig/init migration-config [::migration-config])
   (migratus/create migration-config "testing-migration")
   (migratus/rollback migration-config)
   (migratus/migrate migration-config))

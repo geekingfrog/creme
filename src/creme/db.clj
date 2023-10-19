@@ -1,9 +1,11 @@
 (ns creme.db
-  (:import (com.zaxxer.hikari HikariDataSource))
-  (:require [integrant.core :as ig]
-            [next.jdbc :as jdbc]
-            [next.jdbc.connection :as connection]
-            [creme.config :as config]))
+  (:require
+   [creme.config :as config]
+   [integrant.core :as ig]
+   [next.jdbc :as jdbc]
+   [next.jdbc.connection :as connection])
+  (:import
+   (com.zaxxer.hikari HikariDataSource)))
 
 (defmethod ig/init-key
   ::db-pool

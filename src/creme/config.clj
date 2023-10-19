@@ -8,7 +8,7 @@
   (do
     (timbre/merge-config!
      {:min-level
-      [["com.zaxxer.hikari" :warn]
+      [["com.zaxxer.hikari.*" :warn]
        ["creme.*" :debug]
        ["*" :info]]})
     {::port 8000
